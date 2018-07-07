@@ -55,6 +55,7 @@ struct Pos {
     y: usize,
 }
 
+#[derive(PartialEq)]
 enum Dir {
     Up,
     Down,
@@ -102,16 +103,16 @@ impl Game {
     }
 
     fn update(&mut self, key_state: &gba::KeyState) {
-        if key_state.is_triggered(gba::Key::Up) {
+        if self.dir != Dir::Down && key_state.is_triggered(gba::Key::Up) {
             self.dir = Dir::Up
         }
-        if key_state.is_triggered(gba::Key::Down) {
+        if self.dir != Dir::Up && key_state.is_triggered(gba::Key::Down) {
             self.dir = Dir::Down
         }
-        if key_state.is_triggered(gba::Key::Left) {
+        if self.dir != Dir::Right && key_state.is_triggered(gba::Key::Left) {
             self.dir = Dir::Left
         }
-        if key_state.is_triggered(gba::Key::Right) {
+        if self.dir != Dir::Left && key_state.is_triggered(gba::Key::Right) {
             self.dir = Dir::Right
         }
         self.snake[self.length].x = self.pos.x;
