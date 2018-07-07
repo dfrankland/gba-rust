@@ -9,6 +9,7 @@ For now there is only a very simple implementation of snake.
 ## Prerequisites
 
 *   [`rustup`](https://rustup.rs/)
+
     ```bash
     curl https://sh.rustup.rs -sSf | sh
     ```
@@ -20,11 +21,13 @@ For now there is only a very simple implementation of snake.
     ```
 
 *   Rust sources
+
     ```bash
     rustup component add rust-src
     ```
 
 *   [`xargo`](https://github.com/japaric/xargo)
+
     ```bash
     cargo install xargo
     ```
