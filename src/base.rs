@@ -1,5 +1,5 @@
+use core::fmt::{write, Error, Write};
 use gba;
-use core::fmt::{Write, Error, write};
 
 #[lang = "eh_personality"]
 pub extern "C" fn rust_eh_personality() {}
@@ -24,10 +24,11 @@ impl Write for BgWriter {
 
 #[no_mangle]
 #[lang = "panic_fmt"]
-pub extern "C" fn rust_begin_unwind(_msg: ::core::fmt::Arguments,
-                                   _file: &'static str,
-                                   _line: u32)
-                                   -> ! {
+pub extern "C" fn rust_begin_unwind(
+    _msg: ::core::fmt::Arguments,
+    _file: &'static str,
+    _line: u32,
+) -> ! {
     load_font(0);
     gba::hw::write_pal(0, 0);
     gba::hw::write_pal(15, 0x7fff);
@@ -37,9 +38,10 @@ pub extern "C" fn rust_begin_unwind(_msg: ::core::fmt::Arguments,
         gba::hw::write_vram16(0x800 + i, 0);
     }
     let mut writer = BgWriter(0x800);
-    write(&mut writer,
-          format_args!("Panic in line {} of\n{}\n\n{}", _line, _file, _msg))
-        .unwrap();
+    write(
+        &mut writer,
+        format_args!("Panic in line {} of\n{}\n\n{}", _line, _file, _msg),
+    ).unwrap();
     loop {}
 }
 
@@ -68,7 +70,10 @@ pub mod rand {
             Rand { state: seed }
         }
         pub fn next_bool(&mut self) -> bool {
-            self.state = self.state.wrapping_mul(1664525u32).wrapping_add(1013904223u32);
+            self.state = self
+                .state
+                .wrapping_mul(1664525u32)
+                .wrapping_add(1013904223u32);
             self.state & 0x80000000u32 != 0
         }
         pub fn next_u8(&mut self) -> u8 {

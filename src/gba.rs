@@ -12,7 +12,7 @@ pub mod hw {
     }
 
     macro_rules! hw_reg {
-        (rw $addr: expr, $read:ident, $write: ident) => {
+        (rw $addr:expr, $read:ident, $write:ident) => {
             #[allow(dead_code)]
             pub fn $read() -> u16 {
                 unsafe { read16($addr) }
@@ -23,13 +23,13 @@ pub mod hw {
                 unsafe { write16($addr, value) }
             }
         };
-        (r $addr: expr, $read: ident) => {
+        (r $addr:expr, $read:ident) => {
             #[allow(dead_code)]
             pub fn $read() -> u16 {
                 unsafe { read16($addr) }
             }
         };
-        (w $addr: expr, $write: ident) => {
+        (w $addr:expr, $write:ident) => {
             #[allow(dead_code)]
             pub fn $write(value: u16) {
                 unsafe { write16($addr, value) }

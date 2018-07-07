@@ -23,7 +23,9 @@ struct Arena {
 
 impl Arena {
     pub fn new() -> Arena {
-        Arena { data: [Tile::Empty; WIDTH * HEIGHT] }
+        Arena {
+            data: [Tile::Empty; WIDTH * HEIGHT],
+        }
     }
 
     pub fn set(&mut self, x: usize, y: usize, tile: Tile) {
