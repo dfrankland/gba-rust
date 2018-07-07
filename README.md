@@ -54,3 +54,10 @@ All that's needed is to run a small bash script.
 # Release
 ./build.sh --release
 ```
+
+## Running
+
+After building, find the `.gba` file to load into a GBA emulator in `./out`. So
+far, this has been tested and works on [`mGBA`][mgba].
+
+[mgba]: https://github.com/mgba-emu/mgba
